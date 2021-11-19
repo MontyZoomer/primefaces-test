@@ -13,6 +13,50 @@
 
         <h1>#{testView.string}</h1>
         <h:form id="frmTest">
+
+            <p:dataTable id="animalDT" widgetVar="animsDT" value="#{testView.animalList}" var="animal">
+
+                <p:column rendered="#{testView.columnMap['COL1']}" sortBy="#{animal.type}" filterBy="#{animal.type}" >
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('animsDT').filter()">
+                            <f:selectItem itemLabel="All" noSelectionOption="true" itemValue="#{null}"/>
+                            <f:selectItem itemLabel="Tiger" itemValue="Tiger"/> 
+                            <f:selectItem itemLabel="Elephant" itemValue="Elephant"/> 
+                            <f:selectItem itemLabel="Bear" itemValue="Bear"/> 
+                        </p:selectOneMenu>
+                    </f:facet>
+                    #{animal.type}
+                </p:column>
+                
+                <p:column rendered="#{testView.columnMap['COL2']}" sortBy="#{animal.name}" filterBy="#{animal.name}" >
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('animsDT').filter()">
+                            <f:selectItem itemLabel="All" noSelectionOption="true" itemValue="#{null}"/>
+                            <f:selectItem itemLabel="Max" itemValue="Max"/> 
+                            <f:selectItem itemLabel="Nellie" itemValue="Nellie"/> 
+                            <f:selectItem itemLabel="Balloo" itemValue="Balloo"/> 
+                        </p:selectOneMenu>
+                    </f:facet>
+                    #{animal.name}
+                </p:column>
+                <p:column rendered="#{testView.columnMap['COL3']}" sortBy="#{animal.color}" filterBy="#{animal.color}" >
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('animsDT').filter()">
+                            <f:selectItem itemLabel="All" noSelectionOption="true" itemValue="#{null}"/>
+                            <f:selectItem itemLabel="White" itemValue="White"/> 
+                            <f:selectItem itemLabel="Pink" itemValue="Pink"/> 
+                            <f:selectItem itemLabel="Brown" itemValue="Brown"/> 
+                        </p:selectOneMenu>
+                    </f:facet>
+                    #{animal.color}
+                </p:column>                
+            </p:dataTable>
+            <div></div>
+            <p:commandButton value="Toggle Col 2" actionListener="#{testView.toggleColumn('COL2')}" update="animalDT" />
+            <div></div>
+            <p:commandButton value="Toggle Col 3" actionListener="#{testView.toggleColumn('COL3')}" update="animalDT" />
+            <div></div>
+            <p:commandButton value="Toggle Col 2 Non Ajax" ajax="false" actionListener="#{testView.toggleColumn('COL2')}" update="animalDT" />
             
         </h:form>
 
